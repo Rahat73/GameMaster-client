@@ -4,6 +4,7 @@ import Blog from "../../Pages/Blog/Blog";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login-Registration/Login";
 import Registration from "../../Pages/Login-Registration/Registration";
+import Services from "../../Pages/Services/Services";
 import TermsAndConditions from "../../Pages/TermsAndConditions/TermsAndConditions";
 
 export const router = createBrowserRouter([
@@ -14,6 +15,11 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
+            },
+            {
+                path: '/services',
+                element: <Services></Services>,
+                loader: () => fetch('http://localhost:5000/services')
             },
             {
                 path: '/blog',

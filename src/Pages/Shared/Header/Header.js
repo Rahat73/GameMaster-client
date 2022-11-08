@@ -26,8 +26,8 @@ const Header = () => {
                             <li className='hover:text-red-600 '><Link to="/">
                                 Home
                             </Link></li>
-                            <li className='hover:text-red-600 '><Link to="courses">
-                                Courses
+                            <li className='hover:text-red-600 '><Link to="services">
+                                Services
                             </Link></li>
                             <li className='hover:text-red-600 '><Link to="faq">
                                 FAQ
@@ -58,8 +58,8 @@ const Header = () => {
                         <li className='hover:text-red-600 '><Link to="/">
                             Home
                         </Link></li>
-                        <li className='hover:text-red-600 '><Link to="courses">
-                            Courses
+                        <li className='hover:text-red-600 '><Link to="services">
+                            Services
                         </Link></li>
                         <li className='hover:text-red-600 '><Link to="faq">
                             FAQ
