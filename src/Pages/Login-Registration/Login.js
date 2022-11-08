@@ -1,18 +1,51 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaGoogle } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
 
+    const { setLoading, signIn, googleSignInProvider } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/'
 
-    const handleSubmit = () => {
+    const googleProvider = new GoogleAuthProvider();
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log('email/pass', user)
+                form.reset();
+                navigate(from, { replace: true });
+            })
+            .catch(e => {
+                toast.error(e.message);
+            })
+            .finally(() => {
+                setLoading(false);
+            })
     }
 
     const handleGoogleSignIn = () => {
-
+        googleSignInProvider(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log('google', user);
+                navigate(from, { replace: true });
+            })
+            .catch(e => {
+                toast.error(e.message);
+            });
     }
 
     return (

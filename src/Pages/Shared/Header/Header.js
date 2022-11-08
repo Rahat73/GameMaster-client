@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/logo.png'
+import { AuthContext } from '../../../Contexts/AuthProvider';
 
 const Header = () => {
+
+    const { user, logOut } = useContext(AuthContext);
+
+    console.log(user);
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
+
     return (
         <div>
             <div className="navbar justify-between pt-1 pb-0 px-14 border-b-2 border-red-900">
@@ -24,11 +35,20 @@ const Header = () => {
                             <li className='hover:text-red-600 '><Link to="blog">
                                 Blog
                             </Link></li>
-                            {/* work needed -----------------------------------*/}
-                            <li className='hover:text-red-600 '><Link to="login">
-                                Login
-                            </Link></li>
-                            {/* work needed -----------------------------------*/}
+                            {
+                                user?.uid ?
+                                    <>
+                                        <li><Link onClick={handleLogOut}>
+                                            LogOut
+                                        </Link></li>
+                                    </>
+                                    :
+                                    <>
+                                        <li><Link to="login">
+                                            Login
+                                        </Link></li>
+                                    </>
+                            }
                         </ul>
                     </div>
                     <Link to="/"><button><img className='h-16 lg:h-28' src={logo} alt="logo" /></button></Link>
@@ -50,15 +70,25 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className='menu menu-horizontal p-0 items-center hidden md:block'>
-                    {/* work needed---------------------------- */}
-                    <Link className='mr-2 btn btn-ghost hover:text-red-600 ' to="login">Login</Link>
-                    {/* work needed ------------------------------ */}
+                    {
+                        user?.uid ?
+                            <>
+                                <Link className='btn btn-ghost' onClick={handleLogOut}>LogOut</Link>
+                            </>
+                            :
+                            <>
+                                <Link className='mr-2 btn btn-ghost' to="login">Login</Link>
+                            </>
+                    }
                 </div>
                 <div>
-                    <div className='tooltip' data-tip='use_name'>
+                    <div className='tooltip' data-tip={user?.displayName}>
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar px mx-4">
                             <div className="w-10 rounded-full">
-                                <img src="https://placeimg.com/80/80/people" alt='' />
+                                {
+                                    user?.photoURL ?
+                                        <img src={user?.photoURL} alt='profile pic' /> : <></>
+                                }
                             </div>
                         </label>
                     </div>

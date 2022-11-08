@@ -1,24 +1,74 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaGoogle } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Registration = () => {
 
+    const { createUser, updateUserProfile, googleSignInProvider } = useContext(AuthContext);
+
+    const googleProvider = new GoogleAuthProvider();
+
     const [accepted, setAccepted] = useState(false);
-
-    const handleSubmit = () => {
-
-    }
 
     const handleTnC = event => {
         setAccepted(event.target.checked);
         console.log(event.target.checked);
     }
 
-    const handleGoogleSignIn = () => {
+    const handleUpdateUserProfile = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(e => {
+                toast.error(e.message);
+            });
+    }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.userName.value;
+        const photoURL = form.photoURL.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const confirmPassword = form.confirmPassword.value;
+
+        if (password === confirmPassword) {
+            createUser(email, password)
+                .then(result => {
+                    const user = result.user;
+                    console.log('result.user', user);
+                    form.reset();
+                    handleUpdateUserProfile(name, photoURL);
+                    toast.success('Account Created Successfully');
+                })
+                .catch(e => {
+                    toast.error(e.message);
+                });
+        }
+        else {
+            toast.error("Confirm Password doesn't match")
+        }
+    }
+
+
+
+    const handleGoogleSignIn = () => {
+        googleSignInProvider(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log('result.user', user);
+            })
+            .catch(e => {
+                toast.error(e.message);
+            });
     }
 
     return (
