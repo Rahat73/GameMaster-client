@@ -28,9 +28,6 @@ const Header = () => {
                             <li className='hover:text-red-600 '><Link to="login">
                                 Login
                             </Link></li>
-                            <li className='hover:text-red-600 '><Link to="registration">
-                                Register
-                            </Link></li>
                             {/* work needed -----------------------------------*/}
                         </ul>
                     </div>
@@ -55,7 +52,6 @@ const Header = () => {
                 <div className='menu menu-horizontal p-0 items-center hidden md:block'>
                     {/* work needed---------------------------- */}
                     <Link className='mr-2 btn btn-ghost hover:text-red-600 ' to="login">Login</Link>
-                    <Link className='btn btn-ghost hover:text-red-600 ' to="registration">Register</Link>
                     {/* work needed ------------------------------ */}
                 </div>
                 <div>
