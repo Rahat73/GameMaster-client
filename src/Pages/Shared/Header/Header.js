@@ -16,7 +16,7 @@ const Header = () => {
 
     return (
         <div>
-            <div className="navbar justify-between pt-1 pb-0 px-14 border-b-2 border-red-900">
+            <div className="navbar justify-between pt-1 pb-0 px-14 border-b-2 border-red-500">
                 <div className="">
                     <div className="dropdown">
                         <label tabIndex="0" className="btn btn-ghost lg:hidden">
