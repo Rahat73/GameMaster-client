@@ -25,7 +25,7 @@ const ServiceCard = ({ service }) => {
                 </PhotoProvider></figure>
                 <div className="card-body">
                     <h2 className="card-title">{title}</h2>
-                    <p>{slicedTxt}</p>
+                    <p className='text-start'>{slicedTxt}</p>
                     <div className="pt-5 card-actions justify-between items-center">
                         <div className='flex'><HiOutlineCurrencyDollar className='text-2xl text-amber-200 mx-2'></HiOutlineCurrencyDollar><span>{price}</span></div>
                         <div className='flex'><HiStar className='text-2xl text-warning mx-2'></HiStar><span>{rating}</span></div>

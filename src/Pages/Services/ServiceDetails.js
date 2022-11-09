@@ -1,19 +1,62 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { HiOutlineCurrencyDollar, HiStar, HiUserGroup } from "react-icons/hi";
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
+import ItemReviews from '../../Components/ItemReviews/ItemReviews';
 
 const ServiceDetails = () => {
 
     const serviceDetails = useLoaderData();
     const { _id, title, img, price, rating, description, users } = serviceDetails;
 
+    const { user } = useContext(AuthContext);
+
+    const [reviews, setReviews] = useState([]);
+    useEffect(() => {
+        fetch(`http://localhost:5000/reviews/${_id}`)
+            .then(res => res.json())
+            .then(data => setReviews(data))
+    }, [_id])
+
     const handleReview = (event) => {
         event.preventDefault();
         const form = event.target;
-        const reviewDesc = form.reviewDesc.value;
-        const reviewRate = form.rating.value;
-        console.log(reviewDesc, reviewRate)
-        form.reset();
+        const reviewDescValue = form.reviewDesc.value;
+
+        let reviewRateValue;
+        if (form.rating.value === "") {
+            reviewRateValue = "5";
+        }
+        else {
+            reviewRateValue = form.rating.value;
+        }
+
+        const review = {
+            serviceID: _id,
+            userID: user?.uid,
+            userName: user?.displayName,
+            userImg: user?.photoURL,
+            reviewDesc: reviewDescValue,
+            reviewRate: reviewRateValue
+        }
+
+        // console.log(review)
+
+        fetch('http://localhost:5000/review', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(review)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast('Review added successfully. Reload to see your review');
+                    form.reset();
+                }
+            })
     }
 
     return (
@@ -33,28 +76,45 @@ const ServiceDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className='py-5 grid grid-cols-6 bg-red-500 bg-opacity-30 bg-clip-padding backdrop-filter backdrop-blur-lg'>
-                <div className='col-span-4 border-r border-red-500'>Reviews</div>
-                <div className='col-span-2'>
-                    <form onSubmit={handleReview}>
-                        <div className="form-control w-11/12 mx-auto">
-                            <label className="label">
-                                <span className="label-text">Your bio</span>
-                                <span className="label-text-alt">Alt label</span>
-                            </label>
-                            <textarea className="textarea textarea-bordered h-24" name='reviewDesc' placeholder="Enter your review" required></textarea>
-                            <div className="rating mt-5 mx-auto">
-                                <input type="radio" value='1' name="rating" className="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" value='2' name="rating" className="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" value='3' name="rating" className="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" value='4' name="rating" className="mask mask-star-2 bg-orange-400" />
-                                <input type="radio" value='5' name="rating" className="mask mask-star-2 bg-orange-400" />
-                            </div>
-                            <div>
-                                <button className='btn btn-outline btn-secondary border border-slate-400 mt-10 mb-5 capitalize' type='submit'><p className='text-white'>Submit Review</p></button>
-                            </div>
-                        </div>
-                    </form>
+            <div className='py-5 grid grid-cols-1 lg:grid-cols-6 bg-red-500 bg-opacity-30 bg-clip-padding backdrop-filter backdrop-blur-lg'>
+                <div className='col-span-1 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 border-r border-red-500'>
+                    {
+                        reviews.map(review => <ItemReviews
+                            key={review._id}
+                            review={review}
+                        >
+                        </ItemReviews>)
+                    }
+                </div>
+                <div className='col-span-1 lg:col-span-2'>
+                    {
+                        user?.uid ?
+                            <>
+                                <form onSubmit={handleReview}>
+                                    <div className="form-control w-11/12 mx-auto">
+                                        <label className="label">
+                                            <span className="label-text">{user?.displayName}</span>
+                                            <span className="label-text-alt">{user?.email}</span>
+                                        </label>
+                                        <textarea className="textarea textarea-bordered h-24" name='reviewDesc' placeholder="Enter your review" required></textarea>
+                                        <div className="rating mt-5 mx-auto">
+                                            <input type="radio" value='1' name="rating" className="mask mask-star-2 bg-orange-400" />
+                                            <input type="radio" value='2' name="rating" className="mask mask-star-2 bg-orange-400" />
+                                            <input type="radio" value='3' name="rating" className="mask mask-star-2 bg-orange-400" />
+                                            <input type="radio" value='4' name="rating" className="mask mask-star-2 bg-orange-400" />
+                                            <input type="radio" value='5' name="rating" className="mask mask-star-2 bg-orange-400" />
+                                        </div>
+                                        <div>
+                                            <button className='btn btn-outline btn-secondary border border-slate-400 mt-10 mb-5 capitalize' type='submit'><p className='text-white'>Submit Review</p></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </>
+                            :
+                            <>
+                                <h1 className='text-2xl font-semibold'>Please Login to add a review</h1>
+                            </>
+                    }
                 </div>
             </div>
         </div>
