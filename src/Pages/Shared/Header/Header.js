@@ -23,30 +23,32 @@ const Header = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            <li className='hover:text-red-600 '><Link to="/">
+                            <li className='hover:text-red-600 text-lg'><Link to="/">
                                 Home
                             </Link></li>
-                            <li className='hover:text-red-600 '><Link to="services">
+                            <li className='hover:text-red-600 text-lg'><Link to="services">
                                 Services
                             </Link></li>
-                            <li className='hover:text-red-600 '><Link to="faq">
+                            <li className='hover:text-red-600 text-lg'><Link to="faq">
                                 FAQ
                             </Link></li>
-                            <li className='hover:text-red-600 '><Link to="blog">
+                            <li className='hover:text-red-600 text-lg'><Link to="blog">
                                 Blog
                             </Link></li>
                             {
                                 user?.uid ?
                                     <>
-                                        <li><Link onClick={handleLogOut}>
-                                            LogOut
-                                        </Link></li>
+                                        <ul className="menu menu-horizontal p-0 items-center">
+                                            <li className='hover:text-red-600 text-lg'><Link to={`/myReviews/${user?.uid}`}>My reviews</Link></li>
+                                            <li className='hover:text-red-600 text-lg'><Link to=''>Add service</Link></li>
+                                            <li className='hover:text-red-600 text-lg'><Link onClick={handleLogOut}>Log Out</Link></li>
+                                        </ul>
                                     </>
                                     :
                                     <>
-                                        <li><Link to="login">
-                                            Login
-                                        </Link></li>
+                                        <ul className="menu menu-horizontal p-0 items-center">
+                                            <li className='hover:text-red-600 text-lg'><Link to="login">Login</Link></li>
+                                        </ul>
                                     </>
                             }
                         </ul>
@@ -55,16 +57,16 @@ const Header = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex mx-20">
                     <ul className="menu menu-horizontal p-0 items-center">
-                        <li className='hover:text-red-600 '><Link to="/">
+                        <li className='hover:text-red-600 text-lg'><Link to="/">
                             Home
                         </Link></li>
-                        <li className='hover:text-red-600 '><Link to="services">
+                        <li className='hover:text-red-600 text-lg'><Link to="services">
                             Services
                         </Link></li>
-                        <li className='hover:text-red-600 '><Link to="faq">
+                        <li className='hover:text-red-600 text-lg'><Link to="faq">
                             FAQ
                         </Link></li>
-                        <li className='hover:text-red-600 '><Link to="blog">
+                        <li className='hover:text-red-600 text-lg'><Link to="blog">
                             Blog
                         </Link></li>
                     </ul>
@@ -73,11 +75,17 @@ const Header = () => {
                     {
                         user?.uid ?
                             <>
-                                <Link className='btn btn-ghost' onClick={handleLogOut}>LogOut</Link>
+                                <ul className="menu menu-horizontal p-0 items-center">
+                                    <li className='hover:text-red-600 text-lg'><Link to={`/myReviews/${user?.uid}`}>My reviews</Link></li>
+                                    <li className='hover:text-red-600 text-lg'><Link to=''>Add service</Link></li>
+                                    <li className='hover:text-red-600 text-lg'><Link onClick={handleLogOut}>Log Out</Link></li>
+                                </ul>
                             </>
                             :
                             <>
-                                <Link className='mr-2 btn btn-ghost' to="login">Login</Link>
+                                <ul className="menu menu-horizontal p-0 items-center">
+                                    <li className='hover:text-red-600 text-lg'><Link to="login">Login</Link></li>
+                                </ul>
                             </>
                     }
                 </div>

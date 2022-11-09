@@ -17,7 +17,7 @@ const ServiceDetails = () => {
         fetch(`http://localhost:5000/reviews/${_id}`)
             .then(res => res.json())
             .then(data => setReviews(data))
-    }, [_id])
+    }, [_id, reviews])
 
     const handleReview = (event) => {
         event.preventDefault();
@@ -34,6 +34,8 @@ const ServiceDetails = () => {
 
         const review = {
             serviceID: _id,
+            serviceName: title,
+            serviceImg: img,
             userID: user?.uid,
             userName: user?.displayName,
             userImg: user?.photoURL,
