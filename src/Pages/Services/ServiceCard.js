@@ -1,10 +1,12 @@
 import React from 'react';
 import { HiOutlineCurrencyDollar, HiStar, HiUserGroup } from "react-icons/hi";
 import { Link } from 'react-router-dom';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceCard = ({ service }) => {
 
-    const { service_id, title, img, price, rating, users, description } = service;
+    const { _id, title, img, price, rating, users, description } = service;
 
     let slicedTxt;
     if (description.length > 100) {
@@ -16,7 +18,11 @@ const ServiceCard = ({ service }) => {
     return (
         <div className='py-10'>
             <div className="group card bg-slate-300 bg-opacity-10 bg-clip-padding backdrop-filter backdrop-blur-xl rounded-2xl hover:shadow-lg hover:shadow-red-600 transition ease-in-out hover:scale-105">
-                <figure><img className='transition duration-300 ease-in-out group-hover:scale-125' src={img} alt="ServiceCard" /></figure>
+                <figure><PhotoProvider>
+                    <PhotoView src={img}>
+                        <img className='transition duration-300 ease-in-out group-hover:scale-125' src={img} alt="ServiceCard" />
+                    </PhotoView>
+                </PhotoProvider></figure>
                 <div className="card-body">
                     <h2 className="card-title">{title}</h2>
                     <p>{slicedTxt}</p>
@@ -26,7 +32,7 @@ const ServiceCard = ({ service }) => {
                         <div className='flex'><HiUserGroup className='text-2xl text-warning mx-2'></HiUserGroup><span>{users}</span></div>
                     </div>
                     <div className="card-actions justify-center">
-                        <Link to={`/services/${service_id}`}>
+                        <Link to={`/serviceDetails/${_id}`}>
                             <button className="btn btn-outline btn-secondary btn-sm lg:btn-md"><span className='text-white capitalize'>View Details</span></button>
                         </Link>
                     </div>
