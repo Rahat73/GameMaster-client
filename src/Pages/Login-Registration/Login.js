@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaGoogle } from "react-icons/fa";
@@ -8,6 +8,9 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import useTitle from '../../hook/useTitle';
 
 const Login = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useTitle('Login');
 
@@ -33,7 +36,7 @@ const Login = () => {
                 }
                 console.log(currentUser)
 
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://game-master-server.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -45,6 +48,7 @@ const Login = () => {
                         console.log(data.token);
                         localStorage.setItem('GameMaster-token', data.token);
                         form.reset();
+                        toast.success('Login Successful');
                         navigate(from, { replace: true });
                     });
             })

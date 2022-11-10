@@ -5,13 +5,17 @@ import ServiceCard from './ServiceCard';
 
 const Services = () => {
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     useTitle('Services');
 
     const [loading, setLoading] = useState(true);
 
     const [allServices, setAllServices] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/services`)
+        fetch(`https://game-master-server.vercel.app/services`)
             .then(res => res.json())
             .then(data => {
                 setAllServices(data);
@@ -22,6 +26,7 @@ const Services = () => {
     // const allServices = useLoaderData();
     return (
         <div className='min-h-screen'>
+            <h1 className='text-4xl my-10'>Services</h1>
             {
                 loading ?
                     <>

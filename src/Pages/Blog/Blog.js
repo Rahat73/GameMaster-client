@@ -6,31 +6,48 @@ const Blog = () => {
         window.scrollTo(0, 0);
     }, []);
 
+
     useTitle('Blog');
     return (
         <div className='w-10/12 mx-auto mb-16'>
+            <h1 className='text-4xl my-10'>Blog</h1>
             <div className="carousel w-full space-x-10">
                 <div id="item1" className="flex flex-col carousel-item w-4/5 rounded-box bg-slate-300 bg-opacity-10 bg-clip-padding backdrop-filter backdrop-blur-sm p-10">
-                    <h1 className='mb-4 text-2xl font-semibold'>What is <code>cors</code> ?</h1>
-                    <p>CORS, also known as Cross-Origin Resource Sharing, allows resources such as JavaScript and web fonts to be loaded from domains other than the origin parent domain. These days, a web page commonly loads images, style sheets, scripts, etc. from other domains. Although, a few years ago due to security reasons, web fonts and AJAX (XML Http Requests) were normally restricted to the same-origin policy which restricted their use between domains. Now however, with the use of CORS, the browser and server can communicate to determine whether it is safe to allow a cross-origin request.</p>
+                    <h1 className='mb-4 text-2xl font-semibold'>Difference between SQL and NoSQL ?</h1>
+                    <ul className='list-disc my-3 text-start'>
+                        <li className='text-2xl'>SQL</li>
+                        <li>SQL is also pronounced as “S-Q-L” or as “See-Quel” and is primarily known to be a Relational Database</li>
+                        <li>Database, here is in table format</li>
+                        <li>They are scalable vertically</li>
+                    </ul>
+                    <ul className='list-disc my-3 text-start'>
+                        <li className='text-2xl'>NoSQL</li>
+                        <li>NoSQL is a distributed or Non-relational Database</li>
+                        <li>NoSQL databases are document based with key-value pairs and graph databases.</li>
+                        <li>These are horizontally scalable</li>
+                    </ul>
                 </div>
                 <div id="item2" className="flex flex-col carousel-item w-4/5 rounded-box bg-slate-300 bg-opacity-10 bg-clip-padding backdrop-filter backdrop-blur-sm p-10">
-                    <h1 className='mb-4 text-2xl font-semibold'>Why are you using <code>firebase</code> ? What other options do you have to implement authentication??</h1>
-                    <p className='text-start font-semibold text-lg'>Fast and secured web hosting.</p>
-                    <p>Firebase provides fast, easy, and secure web hosting. The hosting features can further be paired with cloud functions to build and manage microservers on Firebase. With Firebase Hosting, you can send any web applications, static and dynamic content to the CDN with a single command.</p>
-                    <p className='text-start font-semibold text-lg'>Firebase has integrated authentication features</p>
-                    <p>Firebase Authentication aims to make building secure authentication systems easy, while improving the sign-in and onboarding experience for end users. It provides an end-to-end identity solution, supporting email and password accounts, phone auth, and Google, Twitter, Facebook, and GitHub login, and more.</p>
-                    <p className='text-start'><span className='font-semibold text-lg'>Firebase alternatives: </span> Auth0, MongoDB, Okta, Keycloak, Passport</p>
+                    <h1 className='mb-4 text-2xl font-semibold'>What is JWT, and how does it work? What other options do you have to implement authentication??</h1>
+                    <p> Jason Web Token JWT in short are used as a secure way to authenticate users and share information.
+
+                        Typically, a private key, or secret, is used by the issuer to sign the JWT. The receiver of the JWT will verify the signature to ensure that the token hasn’t been altered after it was signed by the issuer. It is difficult for unauthenticated sources to guess the signing key and attempt to change the claims within the JWT.</p>
                 </div>
                 <div id="item3" className="flex flex-col carousel-item w-4/5 rounded-box bg-slate-300 bg-opacity-10 bg-clip-padding backdrop-filter backdrop-blur-sm p-10">
-                    <h1 className='mb-4 text-2xl font-semibold'>How does the private route work?</h1>
-                    <p>The private route component is similar to the public route, the only change is that redirect URL and authenticate condition.
-                        If the user is not authenticated he will be redirected to the login page and the user can only access the authenticated routes If he is authenticated (Logged in).</p>
+                    <h1 className='mb-4 text-2xl font-semibold'>What is the difference between javascript and NodeJS?</h1>
+                    <p>JavaScript is a proper high-level programming language used to create web scripts whereas Node.js is a run time environment built on google’s v8 engine.
+
+                        JavaScript is executed in the browser whereas using Node.js gives us the ability to execute JavaScript outside the browser.
+
+                        JavaScript can manipulate DOM or add HTML within whereas Node.js doesn’t have the capability to add HTML.
+
+                        JavaScript is mainly used to create front end web applications or develop client-side whereas Node.js is used on the back end development that is server-side development</p>
                 </div>
                 <div id="item4" className="flex flex-col carousel-item w-4/5 rounded-box bg-slate-300 bg-opacity-10 bg-clip-padding backdrop-filter backdrop-blur-sm p-10">
-                    <h1 className='mb-4 text-2xl font-semibold'>What is Node? How does Node work?</h1>
-                    <p>Node.js is an open-source backend javascript runtime environment. It is a used as backend service where javascript works on the server-side of the application. This way javascript is used on both frontend and backend. Node.js runs on chrome v8 engine which converts javascript code into machine code, it is highly scalable, lightweight, fast, and data-intensive.</p>
-                    <p className='mt-3'><span className='text-lg font-semibold text-start'>Working of Node.js</span>Node.js accepts the request from the clients and sends the response, while working with the request node.js handles them with a single thread. To operate I/O operations or requests node.js use the concept of threads. Thread is a sequence of instructions that the server needs to perform. It runs parallel on the server to provide the information to multiple clients. Node.js is an event loop single-threaded language. It can handle concurrent requests with a single thread without blocking it for one request.</p>
+                    <h1 className='mb-4 text-2xl font-semibold'>How does NodeJS handle multiple requests at the same time?</h1>
+                    <p>NodeJS receives multiple client requests and places them into EventQueue. NodeJS is built with the concept of event-driven architecture. NodeJS has its own EventLoop which is an infinite loop that receives requests and processes them. EventLoop is the listener for the EventQueue.
+
+                        If NodeJS can process the request without I/O blocking then the event loop would itself process the request and sends the response back to the client by itself. But, it is possible to process multiple requests parallelly using the NodeJS cluster module or worker_threads module.</p>
                 </div>
             </div>
             <div className="flex justify-center w-full py-2 gap-2">

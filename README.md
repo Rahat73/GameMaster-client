@@ -1,3 +1,13 @@
+# Live site link
+https://gamemaster-f68f3.web.app
+
+## Features and Functionality
+* User can find login/register
+* User can see services in services tab without logging in
+* User can see, add reviews to the product, add services
+* User can update delete his review
+* User can only go to the my reviews page if he/she is logged in. that page is protected by privateRoute
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

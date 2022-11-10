@@ -8,6 +8,10 @@ import useTitle from '../../hook/useTitle';
 
 const ServiceDetails = () => {
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     useTitle('Service Details');
 
     const serviceDetails = useLoaderData();
@@ -17,7 +21,7 @@ const ServiceDetails = () => {
 
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews/${_id}`)
+        fetch(`https://game-master-server.vercel.app/reviews/${_id}`)
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [_id, reviews])
@@ -48,7 +52,7 @@ const ServiceDetails = () => {
 
         // console.log(review)
 
-        fetch('http://localhost:5000/review', {
+        fetch('https://game-master-server.vercel.app/review', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

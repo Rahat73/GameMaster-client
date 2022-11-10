@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import useTitle from '../../hook/useTitle';
 
 const AddService = () => {
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     useTitle('Add Service');
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -18,7 +20,7 @@ const AddService = () => {
             users: form.users.value
         }
 
-        fetch('http://localhost:5000/addService', {
+        fetch('https://game-master-server.vercel.app/addService', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

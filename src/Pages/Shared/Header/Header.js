@@ -29,9 +29,6 @@ const Header = () => {
                             <li className='hover:text-red-600 text-lg'><Link to="services">
                                 Services
                             </Link></li>
-                            <li className='hover:text-red-600 text-lg'><Link to="faq">
-                                FAQ
-                            </Link></li>
                             <li className='hover:text-red-600 text-lg'><Link to="blog">
                                 Blog
                             </Link></li>
@@ -62,9 +59,6 @@ const Header = () => {
                         </Link></li>
                         <li className='hover:text-red-600 text-lg'><Link to="services">
                             Services
-                        </Link></li>
-                        <li className='hover:text-red-600 text-lg'><Link to="faq">
-                            FAQ
                         </Link></li>
                         <li className='hover:text-red-600 text-lg'><Link to="blog">
                             Blog

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaGoogle } from "react-icons/fa";
@@ -9,7 +9,9 @@ import useTitle from '../../hook/useTitle';
 
 const Registration = () => {
 
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     useTitle('Registration');
     const { createUser, updateUserProfile, googleSignInProvider } = useContext(AuthContext);
 
@@ -99,7 +101,7 @@ const Registration = () => {
                         <label className="label">
                             <span className="label-text text-lg text-start">Photo URL</span>
                         </label>
-                        <input type="text" name='photoURL' placeholder="Enter photo URL" className="input input-bordered w-full max-w-xs" />
+                        <input type="text" name='photoURL' placeholder="Enter photo URL" className="input input-bordered w-full max-w-xs" required />
                         <label className="label">
                             <span className="label-text text-lg">Email</span>
                         </label>

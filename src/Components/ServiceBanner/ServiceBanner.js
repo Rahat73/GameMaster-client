@@ -6,7 +6,7 @@ const ServiceBanner = () => {
 
     const [services, setServices] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/serviceBanner')
+        fetch('https://game-master-server.vercel.app/serviceBanner')
             .then(res => res.json())
             .then(data => setServices(data))
     }, [])

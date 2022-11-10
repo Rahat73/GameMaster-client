@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Banner from '../../Components/Banner/Banner';
 import SimpleCarousel from '../../Components/CarouselSwiper/SimpleCarousel';
 import ServiceBanner from '../../Components/ServiceBanner/ServiceBanner';
@@ -8,6 +8,9 @@ import useTitle from '../../hook/useTitle';
 // import './Home.css';
 
 const Home = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     useTitle('Home');
     return (
         <div>

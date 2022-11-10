@@ -6,7 +6,9 @@ import useTitle from '../../hook/useTitle';
 import MyReviewsCard from './MyReviewsCard';
 
 const MyReviews = () => {
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     useTitle('My Reviews');
     const myReviews = useLoaderData();
     const [displayReviews, setDisplayReviews] = useState(myReviews);
@@ -16,7 +18,7 @@ const MyReviews = () => {
     //loading data for drawer
     const [selectedReview, setSelectedReview] = useState('');
     useEffect(() => {
-        fetch(`http://localhost:5000/updateReview/${updateReviewID}`)
+        fetch(`https://game-master-server.vercel.app/updateReview/${updateReviewID}`)
             .then(res => res.json())
             .then(data => setSelectedReview(data))
     }, [updateReviewID])
@@ -28,7 +30,7 @@ const MyReviews = () => {
 
     // const [successfulUpdate, setSuccessfullUpdate] = useState(false);
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/myReviews/${selectedReview?.userID}`)
+    //     fetch(`https://game-master-server.vercel.app/myReviews/${selectedReview?.userID}`)
     //         .then(res => res.json())
     //         .then(data => setSelectedReview(data))
     // }, [updateReviewID])
@@ -36,7 +38,7 @@ const MyReviews = () => {
     const handleDelete = _id => {
         const agree = window.confirm('Are you sure to DELETE the review?')
         if (agree) {
-            fetch(`http://localhost:5000/myReviews/${_id}`, {
+            fetch(`https://game-master-server.vercel.app/myReviews/${_id}`, {
                 method: `DELETE`
             })
                 .then(res => res.json())
@@ -74,7 +76,7 @@ const MyReviews = () => {
             reviewRate: reviewRateValue
         }
 
-        fetch(`http://localhost:5000/updateReview/${updateReviewID}`, {
+        fetch(`https://game-master-server.vercel.app/updateReview/${updateReviewID}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -92,6 +94,7 @@ const MyReviews = () => {
 
     return (
         <div className='my-10 min-h-screen'>
+            <h1 className='text-4xl my-10'>My Reviews</h1>
             <div className="drawer drawer-end">
                 <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
