@@ -40,7 +40,7 @@ const Header = () => {
                                     <>
                                         <ul className="menu menu-horizontal p-0 items-center">
                                             <li className='hover:text-red-600 text-lg'><Link to={`/myReviews/${user?.uid}`}>My reviews</Link></li>
-                                            <li className='hover:text-red-600 text-lg'><Link to=''>Add service</Link></li>
+                                            <li className='hover:text-red-600 text-lg'><Link to='/addService'>Add service</Link></li>
                                             <li className='hover:text-red-600 text-lg'><Link onClick={handleLogOut}>Log Out</Link></li>
                                         </ul>
                                     </>
@@ -77,7 +77,7 @@ const Header = () => {
                             <>
                                 <ul className="menu menu-horizontal p-0 items-center">
                                     <li className='hover:text-red-600 text-lg'><Link to={`/myReviews/${user?.uid}`}>My reviews</Link></li>
-                                    <li className='hover:text-red-600 text-lg'><Link to=''>Add service</Link></li>
+                                    <li className='hover:text-red-600 text-lg'><Link to='/addService'>Add service</Link></li>
                                     <li className='hover:text-red-600 text-lg'><Link onClick={handleLogOut}>Log Out</Link></li>
                                 </ul>
                             </>
