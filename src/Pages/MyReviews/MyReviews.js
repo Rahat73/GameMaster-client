@@ -53,7 +53,7 @@ const MyReviews = () => {
     }
 
     const handleUpdate = (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         const form = event.target;
         const reviewDescValue = form.updatedReviewDesc.value;
 
