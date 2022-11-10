@@ -5,9 +5,12 @@ import { FaGoogle } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import useTitle from '../../hook/useTitle';
 
 const Registration = () => {
 
+
+    useTitle('Registration');
     const { createUser, updateUserProfile, googleSignInProvider } = useContext(AuthContext);
 
     const googleProvider = new GoogleAuthProvider();

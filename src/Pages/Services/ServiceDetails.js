@@ -4,8 +4,11 @@ import { HiOutlineCurrencyDollar, HiStar, HiUserGroup } from "react-icons/hi";
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import ItemReviews from '../../Components/ItemReviews/ItemReviews';
+import useTitle from '../../hook/useTitle';
 
 const ServiceDetails = () => {
+
+    useTitle('Service Details');
 
     const serviceDetails = useLoaderData();
     const { _id, title, img, price, rating, description, users } = serviceDetails;

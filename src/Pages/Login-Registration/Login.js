@@ -5,8 +5,11 @@ import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import useTitle from '../../hook/useTitle';
 
 const Login = () => {
+
+    useTitle('Login');
 
     const { setLoading, signIn, googleSignInProvider } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -24,9 +27,26 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log('email/pass', user)
-                form.reset();
-                navigate(from, { replace: true });
+
+                const currentUser = {
+                    email: user.email
+                }
+                console.log(currentUser)
+
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data.token);
+                        localStorage.setItem('GameMaster-token', data.token);
+                        form.reset();
+                        navigate(from, { replace: true });
+                    });
             })
             .catch(e => {
                 toast.error(e.message);

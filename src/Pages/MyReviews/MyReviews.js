@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import useTitle from '../../hook/useTitle';
 // import { AuthContext } from '../../Contexts/AuthProvider';
 import MyReviewsCard from './MyReviewsCard';
 
 const MyReviews = () => {
 
-    // const { user } = useContext(AuthContext);
-
+    useTitle('My Reviews');
     const myReviews = useLoaderData();
     const [displayReviews, setDisplayReviews] = useState(myReviews);
 

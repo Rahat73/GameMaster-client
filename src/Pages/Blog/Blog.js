@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+import useTitle from '../../hook/useTitle';
 
 const Blog = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    useTitle('Blog');
     return (
         <div className='w-10/12 mx-auto mb-16'>
             <div className="carousel w-full space-x-10">

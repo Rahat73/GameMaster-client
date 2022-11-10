@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
             {
                 path: '/services',
                 element: <Services></Services>,
-                loader: async () => fetch('http://localhost:5000/services')
+                // loader: async () => fetch('http://localhost:5000/services')
             },
             {
                 path: '/serviceDetails/:id',
@@ -33,7 +33,11 @@ export const router = createBrowserRouter([
             {
                 path: '/myReviews/:id',
                 element: <PrivateRoutes><MyReviews></MyReviews></PrivateRoutes>,
-                loader: async ({ params }) => fetch(`http://localhost:5000/myReviews/${params.id}`)
+                loader: async ({ params }) => fetch(`http://localhost:5000/myReviews/${params.id}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('GameMaster-token')}`
+                    }
+                })
             },
             {
                 path: '/addService',
