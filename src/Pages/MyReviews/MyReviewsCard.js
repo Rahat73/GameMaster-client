@@ -1,9 +1,8 @@
-import React from 'react';
 import { HiStar } from "react-icons/hi";
 
-const MyReviewsCard = ({ myReview }) => {
+const MyReviewsCard = ({ myReview, handleUpdateId, handleDelete }) => {
 
-    const { serviceName, serviceImg, reviewDesc, reviewRate } = myReview;
+    const { _id, serviceName, serviceImg, reviewDesc, reviewRate } = myReview;
 
     return (
         <div>
@@ -14,8 +13,8 @@ const MyReviewsCard = ({ myReview }) => {
                     <p className='text-start'>{reviewDesc}</p>
                     <div className='flex items-center text-xl'><HiStar></HiStar>{reviewRate}</div>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary capitalize">Update</button>
-                        <button className="btn btn-error capitalize">Delete</button>
+                        <label onClick={() => handleUpdateId(_id)} htmlFor="my-drawer-4" className="btn btn-primary capitalize">Update</label>
+                        <button onClick={() => handleDelete(_id)} className="btn btn-error capitalize">Delete</button>
                     </div>
                 </div>
             </div>

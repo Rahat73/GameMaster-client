@@ -55,7 +55,7 @@ const ServiceDetails = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    toast('Review added successfully. Reload to see your review');
+                    toast('Review added successfully.');
                     form.reset();
                 }
             })
